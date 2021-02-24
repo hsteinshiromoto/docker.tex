@@ -1,0 +1,16 @@
+# Misc.
+git
+gosu
+wget
+graphviz
+make
+curl
+xzdec
+texlive
+texlive-xetex
+texlive-bibtex-extra
+texlive-fonts-extra
+biber
+pandoc
+vim
+latexmk
