@@ -19,8 +19,6 @@ ifndef DOCKER_IMAGE_NAME
 DOCKER_IMAGE_NAME=tex
 endif
 
-DOCKER_IMAGE = hsteinshiromoto/${DOCKER_IMAGE_NAME}
-
 BUILD_DATE = $(shell date +%Y%m%d-%H:%M:%S)
 
 # ---
@@ -29,14 +27,14 @@ BUILD_DATE = $(shell date +%Y%m%d-%H:%M:%S)
 
 ## Build container locally
 build:
-	$(eval DOCKER_IMAGE_TAG=${DOCKER_IMAGE}:${DOCKER_TAG})
+	$(eval DOCKER_IMAGE_TAG=${DOCKER_IMAGE_NAME}:${DOCKER_TAG})
 
 	@echo "Building docker image ${DOCKER_IMAGE_TAG} ..."
 	docker build --build-arg BUILD_DATE=${BUILD_DATE} -t ${DOCKER_IMAGE_TAG} .
 	@echo "Done!"
 
 push:
-	$(eval DOCKER_IMAGE_TAG=docker.pkg.github.com/hsteinshiromoto/docker.tex/${DOCKER_IMAGE}:${DOCKER_TAG})
+	$(eval DOCKER_IMAGE_TAG=docker.pkg.github.com/hsteinshiromoto/docker.tex/${DOCKER_IMAGE_NAME}:${DOCKER_TAG})
 
 	@echo "Pushing docker image ${DOCKER_IMAGE_TAG} to docker.pkg.github.com/hsteinshiromoto"
 	docker push ${DOCKER_IMAGE_TAG}
