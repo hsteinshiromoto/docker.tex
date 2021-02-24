@@ -51,3 +51,6 @@ WORKDIR /home/docker_user
 
 # N.B.: Keep the order entrypoint than cmd
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+
+# Keep the container running
+CMD tail -f /dev/null
