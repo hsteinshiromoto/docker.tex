@@ -43,7 +43,7 @@ make_variables() {
     PROJECT_ROOT=$(pwd)
     DOCKER_USER=docker_user
 
-    DOCKER_IMAGE=hsteinshiromoto/datascience
+    DOCKER_IMAGE=hsteinshiromoto/tex
     DOCKER_TAG=${DOCKER_TAG:-latest}
     DOCKER_IMAGE_TAG=${DOCKER_IMAGE}:${DOCKER_TAG}
 
