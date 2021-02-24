@@ -31,9 +31,16 @@ BUILD_DATE = $(shell date +%Y%m%d-%H:%M:%S)
 build:
 	$(eval DOCKER_IMAGE_TAG=${DOCKER_IMAGE}:${DOCKER_TAG})
 
-	@echo "Building docker image ${DOCKER_IMAGE_TAG}"
+	@echo "Building docker image ${DOCKER_IMAGE_TAG} ..."
 	docker build --build-arg BUILD_DATE=${BUILD_DATE} -t ${DOCKER_IMAGE_TAG} .
+	@echo "Done!"
 
+push:
+	$(eval DOCKER_IMAGE_TAG=docker.pkg.github.com/hsteinshiromoto/docker.tex/${DOCKER_IMAGE}:${DOCKER_TAG})
+
+	@echo "Pushing docker image ${DOCKER_IMAGE_TAG} to docker.pkg.github.com/hsteinshiromoto"
+	docker push ${DOCKER_IMAGE_TAG}
+	@echo "Done!"
 
 #################################################################################
 # PROJECT RULES                                                                 #
