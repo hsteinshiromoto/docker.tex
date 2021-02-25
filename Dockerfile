@@ -29,8 +29,11 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
 # ---
 COPY debian-requirements.txt /usr/local/debian-requirements.txt
 
-RUN apt-get update && \
-	DEBIAN_PACKAGES=$(egrep -v "^\s*(#|$)" /usr/local/debian-requirements.txt) && \
+RUN apt-get update && apt-get install -y software-properties-common
+
+RUN add-apt-repository ppa:deadsnakes/ppa
+
+RUN apt-get update && DEBIAN_PACKAGES=$(egrep -v "^\s*(#|$)" /usr/local/debian-requirements.txt) && \
     apt-get install -y $DEBIAN_PACKAGES && \
     apt-get clean
 

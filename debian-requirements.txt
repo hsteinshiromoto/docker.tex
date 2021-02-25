@@ -14,3 +14,4 @@ biber
 pandoc
 vim
 latexmk
+python3.9
