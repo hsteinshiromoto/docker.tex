@@ -45,8 +45,18 @@ ENV PATH /usr/local/texlive/2017/bin/x86_64-linux:$PATH
 # Copy Container Setup Scripts
 # ---
 COPY bin/entrypoint.sh /usr/local/bin/entrypoint.sh
+COPY bin/setup_python.sh /usr/local/bin/setup_python.sh
+COPY bin/test_environment.py /usr/local/bin/test_environment.py
+COPY bin/setup.py /usr/local/bin/setup.py
+COPY python_requirements.txt /usr/local/python_requirements.txt
 
-RUN chmod +x /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/setup_python.sh && \
+    chmod +x /usr/local/bin/entrypoint.sh && \
+	chmod +x /usr/local/bin/test_environment.py && \
+	chmod +x /usr/local/bin/setup.py
+
+RUN bash /usr/local/bin/setup_python.sh test_environment && \
+	bash /usr/local/bin/setup_python.sh requirements
 	
 # Create the "home" folder
 RUN mkdir -p /home/docker_user
