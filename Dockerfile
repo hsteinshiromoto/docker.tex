@@ -45,9 +45,13 @@ ENV PATH /usr/local/texlive/2017/bin/x86_64-linux:$PATH
 # ---
 # Set Python 3.9 as the default Python
 # ---
+## Install python 3.9
+## N.B.: Make sure to use this method to install python3.9, otherwise there will be two version-3 python available in ubuntu
 RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.9 1 &&\
     update-alternatives --config python3
 
+## Install pip
+## N.B.: Preserve the order of first installing python 3.9 then pip
 RUN apt install -y python3-pip
 # ---
 # Copy Container Setup Scripts
