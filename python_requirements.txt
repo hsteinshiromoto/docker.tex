@@ -6,3 +6,4 @@ flake8
 pylint
 pretty-errors
 typeguard
+click
