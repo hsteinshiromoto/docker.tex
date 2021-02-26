@@ -48,7 +48,7 @@ ENV PATH /usr/local/texlive/2017/bin/x86_64-linux:$PATH
 RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.9 1 &&\
     update-alternatives --config python3
 
-RUN apt install python3-pip
+RUN apt install -y python3-pip
 # ---
 # Copy Container Setup Scripts
 # ---
