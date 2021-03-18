@@ -84,4 +84,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: hsteinshiromoto/docker.$IMAGE_NAME:latest
+          tags: hsteinshiromoto/docker.tex:latest
