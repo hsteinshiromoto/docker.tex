@@ -41,7 +41,7 @@ make_variables() {
     set +a
 
     PROJECT_ROOT=$(pwd)
-    DOCKER_USER=docker_user
+    DOCKER_USER=vscode
 
     DOCKER_IMAGE=hsteinshiromoto/tex
     DOCKER_TAG=${DOCKER_TAG:-latest}
@@ -63,7 +63,8 @@ run_container() {
     if [[ -z "${CONTAINER_ID}" ]]; then
         echo "Creating Container from image ${DOCKER_IMAGE_TAG} ..."
 
-        docker run -d -P -v $(pwd):/home/docker_user -e uid=$UID -t ${DOCKER_IMAGE_TAG} $1 >/dev/null >&1
+        docker run -d -P -v $(pwd):/home/${DOCKER_USER} -e uid=$UID -e gid=$GID \
+                -t ${DOCKER_IMAGE_TAG} $1 >/dev/null >&1
 
         sleep 2
         get_container_id
