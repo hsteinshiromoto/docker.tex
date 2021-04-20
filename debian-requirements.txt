@@ -3,6 +3,7 @@ biber
 build-essential
 curl
 git
+gnupg2
 gosu
 graphviz
 latexmk
@@ -11,6 +12,7 @@ pandoc
 python3-pypdf2
 python3.9
 python3.9-distutils
+sudo
 texlive
 texlive-bibtex-extra
 texlive-fonts-extra
