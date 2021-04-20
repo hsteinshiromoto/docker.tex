@@ -10,6 +10,11 @@ ARG BUILD_DATE
 # Silence debconf
 ARG DEBIAN_FRONTEND=noninteractive
 
+# Add vscode user to the container
+ARG USERNAME=vscode
+ARG USER_UID=1000
+ARG USER_GID=$USER_UID
+
 # ---
 # Enviroment variables
 # ---
@@ -18,7 +23,7 @@ ENV LANG=C.UTF-8 \
 ENV TZ Australia/Sydney
 
 # Set container time zone
-USER root
+# USER root
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 LABEL org.label-schema.build-date=$BUILD_DATE \
@@ -41,6 +46,16 @@ RUN apt-get --purge remove -y .\*-doc$ && \
     apt-get clean -y
 
 ENV PATH /usr/local/texlive/2017/bin/x86_64-linux:$PATH
+
+# ---
+# Setup vscode as nonroot user
+# ---
+RUN groupadd --gid $USER_GID $USERNAME \
+    && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
+    #
+    # [Optional] Add sudo support. Omit if you don't need to install software after connecting.
+    && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
+    && chmod 0440 /etc/sudoers.d/$USERNAME
 
 # ---
 # Set Python 3.9 as the default Python
@@ -71,8 +86,11 @@ RUN bash /usr/local/bin/setup_python.sh test_environment && \
 	bash /usr/local/bin/setup_python.sh requirements
 	
 # Create the "home" folder
-RUN mkdir -p /home/docker_user
-WORKDIR /home/docker_user
+RUN mkdir -p /home/$USERNAME
+WORKDIR /home/$USERNAME
+
+# N.B.: Keep the order 1. entrypoint, 2. cmd
+USER $USERNAME
 
 # N.B.: Keep the order entrypoint than cmd
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 ## Test python environment is setup correctly
 if [[ $1 = "test_environment" ]]; then
