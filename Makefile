@@ -12,7 +12,7 @@ DOCKER_PARENT_IMAGE="ubuntu:latest"
 endif
 
 ifndef DOCKER_IMAGE_NAME
-DOCKER_IMAGE_NAME=docker.pkg.github.com/hsteinshiromoto/$(shell basename $(CURDIR))/tex
+DOCKER_IMAGE_NAME=hsteinshiromoto/$(shell basename $(CURDIR))
 endif
 
 BUILD_DATE = $(shell date +%Y%m%d-%H:%M:%S)
