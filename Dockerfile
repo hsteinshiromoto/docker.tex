@@ -21,6 +21,7 @@ ARG USER_GID=$USER_UID
 ENV LANG=C.UTF-8 \
     LC_ALL=C.UTF-8
 ENV TZ Australia/Sydney
+ENV SHELL /bin/bash
 
 # Set container time zone
 # USER root
